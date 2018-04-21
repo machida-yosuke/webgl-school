@@ -63,7 +63,7 @@
         // ィブな処理が行なえますね。ですから、コントローラにはイベントを拾う対
         // 象となるオブジェクトを与えてやる必要があります。
         // 通常は、three.js のレンダリングの対象となる DOM を指定すればいいでし
-        // ょう。第一引数にはカメラオブジェクトを与えます。
+        // ょう。第一引数にはカメラオブジェクト, 第二引数はどのdomからイベントをひろうか
         // --------------------------------------------------------------------
         // orbit controls @@@
         controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -71,8 +71,11 @@
         geometry = new THREE.BoxGeometry(1.0, 1.0, 1.0);
         material = new THREE.MeshBasicMaterial(MATERIAL_PARAM);
         box = new THREE.Mesh(geometry, material);
-
+        
         scene.add(box);
+
+        const gui = new dat.GUI();
+        gui.add(CAMERA_PARAM, 'near')
 
         // - レンダリングループを定義 -----------------------------------------
         // 繰り返しレンダリングを行うために、レンダリングループを定義します。
@@ -80,6 +83,7 @@
         // び出され、結果的にループしながら何度も描画が行われるようになります。
         // このようなレンダリングループは、Esc キーで停止できるようにしておくと
         // 精神の安定が得られます（個人の見解ですｗ）
+        // loopの回避術　requestAnimationFrameをとめる
         // --------------------------------------------------------------------
         let run = true;
         window.addEventListener('keydown', (eve) => {
@@ -89,12 +93,12 @@
         // rendering @@@
         render();
         function render(){
-            // rendering loop
-            if(run){requestAnimationFrame(render);}
+            if(run){
+              requestAnimationFrame(render);
+            }
 
             // rendering
             renderer.render(scene, camera);
         }
     }, false);
 })();
-
