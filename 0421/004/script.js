@@ -70,6 +70,9 @@
         box = new THREE.Mesh(geometry, material);
         scene.add(box);
 
+        //線が無輝方向が＋になる　わかりやすい
+        // 座標系　openGLは右手系　webgl はここ
+        // directX は左手系
         axesHelper = new THREE.AxesHelper(5.0);
         scene.add(axesHelper);
 
@@ -83,6 +86,7 @@
         // れぞれにイベントを登録しています。
         // ボタンの押下状態は、広いスコープで宣言した変数を参照することで、レン
         // ダリングに正しくその影響を反映させることができます。
+        //
         // --------------------------------------------------------------------
         // mousemove イベント @@@
         window.addEventListener('mousemove', (eve) => {
@@ -90,9 +94,11 @@
             let horizontal = (eve.clientX / width - 0.5) * 2.0;
             let vertical   = -(eve.clientY / height - 0.5) * 2.0;
             // 求めた移動量をボックスの座標に反映
-            box.position.x = horizontal;
+            console.log(horizontal, vertical);
+            box.position.x = horizontal * 1.0;
             box.position.y = vertical;
         }, false);
+
         // mousedown イベント @@@
         window.addEventListener('mousedown', () => {
             // ボタンダウンでフラグを立てる
@@ -103,19 +109,21 @@
             // ボタンを離したときにフラグを降ろす
             isDown = false;
         }, false);
+        console.log(camera);
 
         render();
         function render(){
             if(run){requestAnimationFrame(render);}
-
             // レンダリングループのなかではフラグに応じてボックスに回転を適用 @@@
             if(isDown === true){
                 // Y 軸回転
-                box.rotation.y += 0.02;
+                // box meshに対し回転を加える
+                // object3Dはすべて便利にプロパティにアクセスできる　cameraも
+                box.rotation.y += 0.2;
+                box.rotation.z += 0.2;
             }
 
             renderer.render(scene, camera);
         }
     }, false);
 })();
-

@@ -52,7 +52,7 @@
         // change material parameter @@@
         const MATERIAL_PARAM = {
             color: 0xff9933,
-            specular: 0xffffff
+            specular: 0x44ff00
         };
         const DIRECTIONAL_LIGHT_PARAM = {
             color: 0xffffff,
@@ -143,4 +143,3 @@
         }
     }, false);
 })();
-

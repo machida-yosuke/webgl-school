@@ -34,8 +34,9 @@
         let isDown = false;
 
         const CAMERA_PARAM = {
-            fovy: 60,               // field of view Y の略
+            fovy: 60,               // field of view Y の略　ズームインズームアウト
             aspect: width / height, // カメラが撮影する空間のアスペクト比
+            //ner forまでの距離が広いほど制度はさがる　遠近がバグるらしい。できるたで最小の空間定義にしたほうがいい
             near: 0.1,              // カメラからニアクリップ面までの距離
             far: 10.0,              // カメラからファークリップ面までの距離
             x: 0.0,                 // カメラの X 座標
@@ -60,7 +61,7 @@
         };
         const MATERIAL_PARAM = {
             color: 0xff9933,   // マテリアルの持つ色
-            specular: 0xffffff // スペキュラ（反射光）の持つ色
+            specular: 0x0000ff // スペキュラ（反射光）の持つ色
         };
         const MATERIAL_PARAM_POINT = {
             color: 0xff9933, // マテリアルの持つ色
@@ -193,4 +194,3 @@
         }
     }, false);
 })();
-

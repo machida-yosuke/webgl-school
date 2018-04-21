@@ -43,7 +43,7 @@
             lookAt: new THREE.Vector3(0.0, 0.0, 0.0)
         };
         const RENDERER_PARAM = {
-            clearColor: 0x333333,
+            clearColor: 0x000000,
             width: width,
             height: height
         };
@@ -52,15 +52,15 @@
         };
         const DIRECTIONAL_LIGHT_PARAM = {
             color: 0xffffff,
-            intensity: 1.0,
+            intensity: 0.2,
             x: 1.0,
             y: 1.0,
             z: 1.0
         };
         // アンビエントライトに関するパラメータの定義 @@@
         const AMBIENT_LIGHT_PARAM = {
-            color: 0xffffff,
-            intensity: 0.2
+            color: 0xffffff,//光の色
+            intensity: 0.5 // 光の強さ
         };
 
         scene = new THREE.Scene();
@@ -144,4 +144,3 @@
         }
     }, false);
 })();
-
