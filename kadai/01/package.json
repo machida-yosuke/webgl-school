@@ -19,6 +19,7 @@
     "extract-text-webpack-plugin": "next",
     "file-loader": "^1.1.11",
     "glob": "^7.1.2",
+    "gsap": "^1.20.4",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.1.0",
     "install": "^0.11.0",
@@ -32,6 +33,7 @@
     "read-config": "^2.0.0",
     "reset.css": "^2.0.2",
     "sass-loader": "^6.0.7",
+    "three": "^0.92.0",
     "webpack": "^4.4.1",
     "webpack-cli": "^2.0.13",
     "webpack-dev-server": "^3.1.1"
@@ -49,5 +51,8 @@
     "ie >= 11",
     "ios >= 9",
     "android >= 4.4"
-  ]
+  ],
+  "dependencies": {
+    "dat.gui": "^0.7.1"
+  }
 }

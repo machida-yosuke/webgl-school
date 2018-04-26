@@ -1,10 +1,7 @@
 import { BASE_DIR } from '../constants.yml'
-import Sample from './lib/Sample';
+import Kadai01 from  './lib/Kadai01'
+const canvas = document.querySelector('#js-canvas');
 
-const sample = new Sample({
-    name: 'world'
-});
-
-document.querySelector('.wrapper').addEventListener('click', () => {
-    console.log(`hello, ${sample.name}. Base directory is ${BASE_DIR}.`);
-});
+const kadai01 = new Kadai01({
+  canvas
+})
