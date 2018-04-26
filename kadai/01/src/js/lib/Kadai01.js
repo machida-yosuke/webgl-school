@@ -49,7 +49,6 @@ export default class Kadai01 {
     this.renderer = new THREE.WebGLRenderer({ antialias: true});
     this.renderer.setClearColor(new THREE.Color(0xffffff))
     this._resizeCanvas()
-
     const gridHelper = new THREE.GridHelper(200, 50);
     this.scene.add(gridHelper);
     const AxesHelper = new THREE.AxesHelper(1000);  // 引数は 軸のサイズ
