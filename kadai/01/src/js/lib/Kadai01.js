@@ -54,7 +54,6 @@ export default class Kadai01 {
     this.scene.add(gridHelper);
     const AxesHelper = new THREE.AxesHelper(1000);  // 引数は 軸のサイズ
     this.scene.add(AxesHelper);
-
     for (let i = 0; i < 100; i++) {
       const positionX = i % 10
       const positionY = Math.floor(i / 10)
