@@ -53,6 +53,7 @@
     "android >= 4.4"
   ],
   "dependencies": {
-    "dat.gui": "^0.7.1"
+    "dat.gui": "^0.7.1",
+    "three-orbitcontrols": "^2.0.0"
   }
 }

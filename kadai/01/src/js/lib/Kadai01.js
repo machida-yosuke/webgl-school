@@ -1,5 +1,6 @@
 import * as THREE from 'three';
-import dat from 'dat.gui'
+import OrbitControls from 'three-orbitcontrols'
+import dat from 'dat.gui';
 
 export default class Kadai01 {
   constructor (opts = {}) {
@@ -9,7 +10,7 @@ export default class Kadai01 {
     this.gui = new dat.GUI();
     this.CAMERA_PARAM = {
       fovy: 60,
-      near: 10,
+      near: 0.1,
       far: 30.0,
       x: 0.0,
       y: 0.0,
@@ -19,7 +20,7 @@ export default class Kadai01 {
     this.isRender = true
     this.boxes = []
     this._initHandler()
-    this.gui.add(this.CAMERA_PARAM,'z', 5, 10).onChange(()=>{
+    this.gui.add(this.CAMERA_PARAM,'z', 10, 30).onChange(()=>{
       this._chageParam();
     })
   }
@@ -49,10 +50,12 @@ export default class Kadai01 {
     this.renderer = new THREE.WebGLRenderer({ antialias: true});
     this.renderer.setClearColor(new THREE.Color(0xffffff))
     this._resizeCanvas()
+
     const gridHelper = new THREE.GridHelper(200, 50);
     this.scene.add(gridHelper);
-    const AxesHelper = new THREE.AxesHelper(1000);  // 引数は 軸のサイズ
+    const AxesHelper = new THREE.AxesHelper(1000);
     this.scene.add(AxesHelper);
+
     for (let i = 0; i < 100; i++) {
       const positionX = i % 10
       const positionY = Math.floor(i / 10)
@@ -61,16 +64,31 @@ export default class Kadai01 {
       this._createBox(positionX - offsetX, positionY - offsetY )
     }
 
+    this.directionalLight = new THREE.DirectionalLight(
+        0xffffff,
+        1.0
+    );
+    this.directionalLight.position.x = 1.0;
+    this.directionalLight.position.y = 1.0;
+    this.directionalLight.position.z = 1.0;
+    this.scene.add(this.directionalLight);
+
+    this.ambientLight = new THREE.AmbientLight(0xffffff, .2);
+    this.scene.add(this.ambientLight);
+
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+
     this.canvas.appendChild(this.renderer.domElement);
-    this.renderer.render(this.scene, this.camera);
+    // this.renderer.render(this.scene, this.camera);
+    this._render()
 
     window.addEventListener('mousedown', (eve) => {
-      this.isRender = true;
-      this._render()
+      // this.isRender = true;
+      // this._render()
     }, false);
 
     window.addEventListener('mouseup', (eve) => {
-      this.isRender = false;
+      // this.isRender = false;
     }, false);
 
     window.addEventListener('resize', () =>{
@@ -80,9 +98,7 @@ export default class Kadai01 {
 
   _createBox(x,y){
     const geometry = new THREE.BoxGeometry(1.0, 1.0, 1.0);
-    const material = new THREE.MeshBasicMaterial({
-      color: 0xff9933
-    })
+    const material = new THREE.MeshStandardMaterial({color: 0x0000ff, roughness:0.2});
     const box = new THREE.Mesh(geometry, material)
     box.position.x = x
     box.position.y = y
@@ -93,7 +109,6 @@ export default class Kadai01 {
   _render(){
     if (this.isRender === false) return
     this.boxes.forEach((box) => {
-      console.log(box.position.y);
       box.rotation.x += 0.01
       box.rotation.y += 0.01
       box.rotation.z += 0.01
