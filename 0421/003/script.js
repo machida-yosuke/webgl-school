@@ -72,9 +72,11 @@
         // X 軸なら、横方向に伸びる軸のこと。同様に Y なら縦方向、Z なら前後に伸
         // びる軸のことをいいます。AxisHelper では、XYZ の各軸を手間なく簡単に、
         // シーンに追加することができます。
+        // 開発用
+        // 
         // --------------------------------------------------------------------
         // axesHelper @@@
-        axesHelper = new THREE.AxesHelper(5.0);
+        axesHelper = new THREE.AxesHelper(2.0);
         scene.add(axesHelper);
 
         window.addEventListener('keydown', (eve) => {
@@ -89,4 +91,3 @@
         }
     }, false);
 })();
-

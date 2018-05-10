@@ -54,7 +54,7 @@
         // ポイントとして生成する場合のためのマテリアルを定義 @@@
         const MATERIAL_PARAM_POINT = {
             color: 0xff9933,
-            size: 0.1
+            size: 1.1
         };
         const DIRECTIONAL_LIGHT_PARAM = {
             color: 0xffffff,
@@ -166,4 +166,3 @@
         }
     }, false);
 })();
-

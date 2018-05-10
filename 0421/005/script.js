@@ -30,14 +30,14 @@
             fovy: 60,
             aspect: width / height,
             near: 0.1,
-            far: 10.0,
+            far: 100.0,
             x: 0.0,
             y: 2.0,
             z: 5.0,
             lookAt: new THREE.Vector3(0.0, 0.0, 0.0)
         };
         const RENDERER_PARAM = {
-            clearColor: 0x333333,
+            clearColor: 0x000000,
             width: width,
             height: height
         };
@@ -46,7 +46,7 @@
         };
         // ライトに関するパラメータの定義 @@@
         const DIRECTIONAL_LIGHT_PARAM = {
-            color: 0xffffff,
+            color: 0xff222f,
             intensity: 1.0,
             x: 1.0,
             y: 1.0,
@@ -82,6 +82,7 @@
         // ランバートマテリアルを選択します。
         // --------------------------------------------------------------------
         // change mesh type @@@
+        // MeshLambertMaterial　Lambertさんが考えた照明効果をうけることができる
         material = new THREE.MeshLambertMaterial(MATERIAL_PARAM);
         box = new THREE.Mesh(geometry, material);
         scene.add(box);
@@ -94,6 +95,8 @@
         // 引数で任意の値を指定してやります。
         // --------------------------------------------------------------------
         // initialize light @@@
+        //directionalLight 例えば太陽の光は光源が遠いので。光が均一に見える（平行）
+
         directionalLight = new THREE.DirectionalLight(
             DIRECTIONAL_LIGHT_PARAM.color,
             DIRECTIONAL_LIGHT_PARAM.intensity
@@ -105,6 +108,9 @@
 
         axesHelper = new THREE.AxesHelper(5.0);
         scene.add(axesHelper);
+
+        var helper = new THREE.DirectionalLightHelper( directionalLight, 5 );
+        scene.add( helper );
 
         window.addEventListener('keydown', (eve) => {
             run = eve.key !== 'Escape';
@@ -128,11 +134,11 @@
             if(run){requestAnimationFrame(render);}
 
             if(isDown === true){
-                box.rotation.y += 0.02;
+                // box.rotation.y += 0.02;
+                directionalLight.position.x -= 0.02
             }
 
             renderer.render(scene, camera);
         }
     }, false);
 })();
-
