@@ -26,7 +26,7 @@
         clearColor: 0
     };
     const MATERIAL_PARAM_POINT = {
-        color: 0x3399ff,
+        color: 0xffffff,
         size: 0.1,
         sizeAttenuation: true
     };
@@ -78,6 +78,7 @@
             geometry.vertices.push(point);
         }
         particle = new THREE.Points(geometry, materialPoint);
+
         scene.add(particle);
 
         // helper
@@ -101,9 +102,8 @@
     // rendering
     function render(){
         if(run){requestAnimationFrame(render);}
-        particle.rotation.x += 0.00125;
-        particle.rotation.y += 0.00375;
+        particle.rotation.x += 0.00125 + (Math.random() * 0.01);
+        particle.rotation.y += 0.00375 + (Math.random() * 0.01);
         renderer.render(scene, camera);
     }
 })();
-

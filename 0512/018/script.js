@@ -32,9 +32,9 @@
         opacity: 0.5,                     // 不透明度
         transparent: true,                // 透明度を有効化するかどうか
         blending: THREE.AdditiveBlending, // 加算合成モードで色を混ぜる
-        size: 0.25,                       // パーティクルの大きさ
+        size: 1,                       // パーティクルの大きさ
         sizeAttenuation: true,            // 遠近感を持たせるかどうか
-        depthWrite: false                 // 深度テストを行うかどうか
+        depthWrite: true                 // 深度テストを行うかどうか
     };
 
     // entry point
@@ -104,4 +104,3 @@
         renderer.render(scene, camera);
     }
 })();
-
