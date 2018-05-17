@@ -107,7 +107,7 @@
         // init 関数をコールする、という指定になっています。
         // --------------------------------------------------------------------
         // load texture @@@
-        let loader = new THREE.TextureLoader();
+        const loader = new THREE.TextureLoader();
         texture = loader.load('sample.jpg', init);
     }, false);
 
@@ -213,4 +213,3 @@
         renderer.render(scene, camera);
     }
 })();
-

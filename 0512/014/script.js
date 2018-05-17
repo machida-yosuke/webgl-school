@@ -40,12 +40,12 @@
     // ------------------------------------------------------------------------
     // scene parameter @@@
     const SCENE_PARAM = {
-        fogColor: 0x333333, // フォグの色
+        fogColor: 0xffffff, // フォグの色
         fogNear: 1.0,       // フォグの掛かり始める距離
         fogFar: 15.0        // フォグが完全に掛かる距離
     };
     const RENDERER_PARAM = {
-        clearColor: 0x333333 // フォグと同じ色にしておくのがポイント！
+        clearColor: 0xffffff // フォグと同じ色にしておくのがポイント！
     };
     const MATERIAL_PARAM = {
         color: 0xff9933,
@@ -191,4 +191,3 @@
         renderer.render(scene, camera);
     }
 })();
-

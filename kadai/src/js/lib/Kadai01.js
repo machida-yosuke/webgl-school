@@ -79,16 +79,16 @@ export default class Kadai01 {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
     this.canvas.appendChild(this.renderer.domElement);
-    // this.renderer.render(this.scene, this.camera);
-    this._render()
+    this.renderer.render(this.scene, this.camera);
+
 
     window.addEventListener('mousedown', (eve) => {
-      // this.isRender = true;
-      // this._render()
+      this.isRender = true;
+      this._render()
     }, false);
 
     window.addEventListener('mouseup', (eve) => {
-      // this.isRender = false;
+      this.isRender = false;
     }, false);
 
     window.addEventListener('resize', () =>{

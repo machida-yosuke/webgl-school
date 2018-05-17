@@ -28,7 +28,7 @@
     };
     const MATERIAL_PARAM_POINT = {
         color: 0xffffff,      // 頂点の色
-        size: 0.1,            // 頂点の基本となるサイズ
+        size: 1.0,            // 頂点の基本となるサイズ
         sizeAttenuation: true // 遠近感を出すかどうかの真偽値 @@@
     };
 
@@ -77,7 +77,7 @@
                 // カウンタ変数 j から Y 座標を算出
                 let y = (j / COUNT - 0.5) * SIZE;
                 // 求めた XY 座標をパーティクル（頂点）の位置を定義
-                let point = new THREE.Vector3(x, y, 0.0);
+                let point = new THREE.Vector3(x, y, 0);
                 // 素体ジオメトリに頂点を加える
                 geometry.vertices.push(point);
             }
@@ -111,4 +111,3 @@
         renderer.render(scene, camera);
     }
 })();
-

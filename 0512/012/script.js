@@ -171,9 +171,10 @@
         if(isDown === true){
             // group に対して処理する @@@
             group.rotation.y += 0.02;
+            // groupに属しているオブジェクトも自身の回転を反映してからgroupに属する
+            box.rotation.z += 0.2
         }
 
         renderer.render(scene, camera);
     }
 })();
-
