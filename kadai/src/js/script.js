@@ -10,11 +10,13 @@ switch (page) {
       canvas
     })
     break;
+
   case 'newZero':
     const newzero = new NewZero({
       canvas
     })
     break;
+
   default:
 
 }
