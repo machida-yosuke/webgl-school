@@ -168,4 +168,3 @@
         renderer.render(scene, camera);
     }
 })();
-

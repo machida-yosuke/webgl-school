@@ -138,7 +138,7 @@
         composer.addPass(renderPass); // まず先に renderPass をコンポーザーに渡す
         glitchPass = new THREE.GlitchPass();
         composer.addPass(glitchPass); // 二番目に glitchPass をコンポーザーに渡す
-        glitchPass.renderToScreen = true; // glitchPass 適用後の結果は画面に直接出す
+        glitchPass.renderToScreen = true // 適用後の結果は画面に直接出す
 
         // group
         group = new THREE.Group();
@@ -214,4 +214,3 @@
         composer.render();
     }
 })();
-

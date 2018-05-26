@@ -36,7 +36,7 @@
     let starMaterial;  // 星のマテリアル @@@
     // constant variables
     const RENDERER_PARAM = {
-        clearColor: 0xaaaaaa
+        clearColor: 0x000000
     };
     const MATERIAL_PARAM = {
         color: 0xffffff
@@ -183,15 +183,23 @@
             moonSphere.position.y - starSphere.position.y,
             moonSphere.position.z - starSphere.position.z
         ];
+
         // 求めたベクトルを正規化する @@@
         let nDirection = normalize3D(direction);
         // 正規化したベクトルを使って星を動かす @@@
         // ※正規化したベクトルは大きすぎる場合があるので 0.1 倍して影響を小さく補正
-        starSphere.position.x += nDirection[0] * 0.1;
-        starSphere.position.y += nDirection[1] * 0.1;
-        starSphere.position.z += nDirection[2] * 0.1;
-
+        console.log(nDirection);
+        //  nDirectionはどっちに向かうかのベクトルのみ
+        // ここのベクトルは大きすぎるので個人の分量で小さくする
+        starSphere.position.x += nDirection[0] * 0.01;
+        starSphere.position.y += nDirection[1] * 0.01;
+        starSphere.position.z += nDirection[2] * 0.01;
         renderer.render(scene, camera);
+        // 数値はjsの場合64ビット
+        // かりに８ビットだとどこまで表現できるかというと 0 - 255
+        // 64bitも限界がる
+        // せいすうぶぶんが多いと
+        // 整数部分が少ないと小数点部分の精度が上がる
     }
 
     /**
@@ -235,4 +243,3 @@
     }
 
 })();
-

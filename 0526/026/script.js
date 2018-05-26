@@ -185,6 +185,7 @@
         let nDirection = normalize3D(direction);
 
         // 更新前のスターの進行方向をあとで使うので取っておく @@@
+        // 1フレーム前の進行方向　Aに相当
         let prevDirection = [
             starDirection[0],
             starDirection[1],
@@ -192,6 +193,7 @@
         ];
 
         // 本来進みたい方向に少しだけベクトルを向ける
+        // Bに相当
         starDirection = normalize3D([
             starDirection[0] + nDirection[0] * 0.1,
             starDirection[1] + nDirection[1] * 0.1,
@@ -211,6 +213,7 @@
         // 変換前と変換後のふたつのベクトルから外積で接線ベクトルを求める @@@
         let tangent = normalize3D(cross3D(prevDirection, starDirection));
         // 変換前と変換後のふたつのベクトルから内積でコサインを取り出す @@@
+        // 内積の結果 cosθが求まる
         let c = dot3D(prevDirection, starDirection);
         // コサインをラジアンに戻す @@@
         let r = Math.acos(c);
@@ -218,8 +221,9 @@
         let q = new THREE.Quaternion();
         q.setFromAxisAngle(new THREE.Vector3(tangent[0], tangent[1], tangent[2]), r);
         // スターの現在のクォータニオンに乗算する @@@
+        console.log(q);
+        // 乗算した結果回転量は回転量は累積される
         starCone.quaternion.premultiply(q);
-
         renderer.render(scene, camera);
     }
 
@@ -288,4 +292,3 @@
     }
 
 })();
-

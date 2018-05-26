@@ -136,7 +136,7 @@
         starSphere.position.set(0.0, 3.0, 0.0);
 
         // 星の進行方向は初期状態ではまずは真上に向かわせる @@@
-        starDirection = [0.0, 1.0, 0.0];
+        starDirection = [0.0, 100.0, 0.0];
 
         // lights
         directionalLight = new THREE.DirectionalLight(
@@ -182,9 +182,11 @@
         // 星と月の距離も調べておく @@@
         let distance = calcLength3D(direction);
         // あとで係数として使う都合上、1.0 より大きくならないようにする
+        // 距離に応じて移動量が変わる処理は別
         distance = Math.min(distance, 2.0) / 2.0;
-
+        console.log(distance);
         // 求めたベクトルを正規化する
+        // 月までの向き
         let nDirection = normalize3D(direction);
 
         // - 星の進行方向を補正する -------------------------------------------
@@ -206,6 +208,7 @@
         ]);
 
         // 求めた進行方向と距離を元に星の位置を動かす @@@
+        //  10%分だけ月の方向に進行方向が修正された状態になっている
         starSphere.position.x += starDirection[0] * 0.05 * distance;
         starSphere.position.y += starDirection[1] * 0.05 * distance;
         starSphere.position.z += starDirection[2] * 0.05 * distance;
@@ -254,4 +257,3 @@
     }
 
 })();
-

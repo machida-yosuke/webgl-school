@@ -27,18 +27,21 @@ export default class Kadai02 {
   }
 
   _createCamera(){
-    // this.camera = new THREE.OrthographicCamera(
+    const param = this._generateCmaraParam(10.0)
+    this.camera = new THREE.OrthographicCamera(
+      param.left,   // レンダリングする空間の左端
+      param.right,  // レンダリングする空間の右端
+      param.top,    // レンダリングする空間の上端
+      param.bottom,
+      CAMERA_PARAM.near,
+      CAMERA_PARAM.far
+    )
+    // this.camera = new THREE.PerspectiveCamera(
     //   CAMERA_PARAM.fovy,
     //   this.width / this.height,
     //   CAMERA_PARAM.near,
     //   CAMERA_PARAM.far
     // )
-    this.camera = new THREE.PerspectiveCamera(
-      CAMERA_PARAM.fovy,
-      this.width / this.height,
-      CAMERA_PARAM.near,
-      CAMERA_PARAM.far
-    )
     this.camera.position.x = 0
     this.camera.position.y = 50
     this.camera.position.z = 0
@@ -101,6 +104,16 @@ export default class Kadai02 {
     this.scene.add(this.group)
   }
 
+  _generateCmaraParam(scale){
+    const aspect = this.width / this.height
+    return {
+      aspect : aspect,
+      left : -aspect * scale,
+      right : aspect * scale,
+      top : scale,
+      bottom : -scale
+    }
+  }
 
   _resizeCanvas(){
     this.width = this.canvas.offsetWidth

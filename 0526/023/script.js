@@ -103,7 +103,10 @@
 
             // 得られた中心原点の座標（二次元ベクトル）を正規化する @@@
             let nVector = normalize2D([x, y]);
-
+            console.log(nVector);
+            // このときは長さが１のベクターになってる
+            // 方角のみになってる
+            // 月の位置が雨後ない理由はベクトルが向きしか考えてないから
             // 正規化したベクトルを元に月の座標を設定する @@@
             moonSphere.position.set(
                 nVector[0] * 2.75,
@@ -196,6 +199,7 @@
      */
     function normalize2D(vec){
         let length = calcLength2D(vec);
+        console.log('length', length);
         if(length === 0.0){return vec;}
         return [vec[0] / length, vec[1] / length];
     }
@@ -210,4 +214,3 @@
     }
 
 })();
-
