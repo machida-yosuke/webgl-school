@@ -73,7 +73,6 @@ export default class Kadai02 {
   _createOrbitcontrol(){
     const control = new OrbitControls(this.camera, this.renderer.domElement)
   }
-
   _render(){
     requestAnimationFrame(()=>{
       this._render()
