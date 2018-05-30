@@ -6,7 +6,7 @@ const GREEN = '#caea77';
 const BLACK = '#656b69';
 const WHITE = '#ecece9';
 
-export default class Kadai01 {
+export default class NewZero {
   constructor (opts = {}) {
     this.canvas = opts.canvas;
     this.width = this.canvas.offsetWidth;
