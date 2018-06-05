@@ -7605,9 +7605,23 @@ textextensions@2:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/textextensions/-/textextensions-2.2.0.tgz#38ac676151285b658654581987a0ce1a4490d286"
 
+three-gltf-loader@^1.93.0:
+  version "1.93.0"
+  resolved "https://registry.yarnpkg.com/three-gltf-loader/-/three-gltf-loader-1.93.0.tgz#ed7dd662c108c9ec37d72d3d289029fbbd4a6d64"
+  dependencies:
+    three ">=0.89.0"
+
+three-gltf2-loader@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/three-gltf2-loader/-/three-gltf2-loader-1.2.0.tgz#1fffae0659b1490034e6d055c7aabc439ab5de21"
+
 three-orbitcontrols@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/three-orbitcontrols/-/three-orbitcontrols-2.0.0.tgz#4a0ce4c790bd85febb20de2ea4521c21c573794c"
+
+three@>=0.89.0:
+  version "0.93.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.93.0.tgz#3fd6c367ef4554abbb6e16ad69936283e895c123"
 
 three@^0.92.0:
   version "0.92.0"
