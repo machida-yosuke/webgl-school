@@ -21,6 +21,7 @@ export default class Kadai03 {
     this._setLight();
     this._setHelper();
     this._setOrbitcontrol();
+    this._setLoader();
   }
 
   _setCamera(){
@@ -71,9 +72,10 @@ export default class Kadai03 {
   }
 
   _setContents(){
-    this._setLoader();
     this._createEarth();
-    // this._createEarthMoon();
+    this._createMoon();
+    this.startTime = Date.now()
+    this._render()
   }
 
   _setLoader(){
@@ -83,13 +85,13 @@ export default class Kadai03 {
       const gltf = data;
       this.satellite = gltf.scene;
       this.scene.add(this.satellite);
-      this._render()
+      this._setContents()
     });
 
     const earthLoader = new THREE.TextureLoader()
     const moonLoader = new THREE.TextureLoader()
     this.earthTexture = earthLoader.load('../img/earth.jpg', ()=>{
-      this.moonTexture = moonLoader.load('../img/moon.jpg', ()=>{
+      this.moonTexture = moonLoader.load('../img/moon2.jpg', ()=>{
         console.log(earthLoader, moonLoader);
       });
     })
@@ -104,11 +106,31 @@ export default class Kadai03 {
     this.scene.add(this.earth)
   }
 
+  _createMoon(){
+    const geometry = new THREE.SphereGeometry(10, 50, 50)
+    const material = new THREE.MeshLambertMaterial()
+    material.map = this.moonTexture;
+    console.log(this.moonTexture);
+    this.moon = new THREE.Mesh(geometry, material)
+    this.scene.add(this.moon)
+    this.moon.scale.set(0.25, 0.25, 0.25)
+  }
+
   _render(){
     requestAnimationFrame(() => {
       this._render()
     });
+    this.nowTime = Date.now() - this.startTime;
+    this.nowTime /= 1000;
+    this.rad = this.nowTime % (Math.PI * 2.0);
+    this.sin = Math.sin(this.rad)
+    this.cos = Math.cos(this.rad)
+    this.moon.position.x = this.sin * 20;
+    this.moon.position.z = this.cos * 20;
+    this.moon.rotation.y = this.rad;
     this.satellite.rotation.z += 0.01
+    this.earth.rotation.y += 0.001
+    this.moon.rotation.y += 0.001
     this.renderer.render(this.scene, this.camera);
   }
 
@@ -119,13 +141,13 @@ export default class Kadai03 {
     this.canvas.height = this.height;
     this.renderer.setSize(this.width, this.height);
     this.camera.aspect = this.width / this.height;
+    this.camera.updateProjectionMatrix()
     this.renderer.render(this.scene, this.camera)
   }
 
   _initHandler(){
     this._createThree();
     this._windowResize();
-    this._setContents()
     window.addEventListener('resize', ()=>{
       this._windowResize();
     })
