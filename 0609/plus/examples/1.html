@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>=^.^=</title>
+<style>
+body{margin: 0;}
+canvas{display: block;}
+</style>
+</head>
+<body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/93/three.min.js"></script>
+<script src="./js/loaders/GLTFLoader.js"></script>
+<script>
+const width  = window.innerWidth;
+const height = window.innerHeight;
+
+const scene  = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera( 45, width / height, 0.001, 100 );
+camera.position.set( 0, 0, 0.5 );
+const renderer = new THREE.WebGLRenderer( { antialias: true } );
+renderer.setSize( width, height );
+renderer.gammaInput = true;
+renderer.gammaOutput = true;
+document.body.appendChild( renderer.domElement );
+
+scene.add( new THREE.HemisphereLight( 0xffffff , 0x332222 ) );
+
+// ここに GLTFLoader を追加していく
+const loader = new THREE.GLTFLoader();
+
+loader.load(
+	// 読み込むglTFファイルへのパス
+	'./model/barger/barger.gltf',
+	// 読み込み（Ajax）完了後のコールバック
+	function ( gltf ) {
+
+		scene.add( gltf.scene );
+
+	}
+);
+
+( function anim () {
+
+	requestAnimationFrame( anim );
+	renderer.render( scene, camera );
+
+} )();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>=^.^=</title>
+<style>
+body{margin: 0;}
+canvas{display: block;}
+</style>
+</head>
+<body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/93/three.min.js"></script>
+<script src="./js/loaders/GLTFLoader.js"></script>
+<script>
+const width  = window.innerWidth;
+const height = window.innerHeight;
+
+const scene  = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera( 45, width / height, 0.001, 100 );
+camera.position.set( 0, 1, 3 );
+const renderer = new THREE.WebGLRenderer( { antialias: true } );
+renderer.setSize( width, height );
+renderer.gammaInput = true;
+renderer.gammaOutput = true;
+document.body.appendChild( renderer.domElement );
+
+scene.add( new THREE.HemisphereLight( 0xffffff , 0x332222 ) );
+
+// ここに GLTFLoader を追加していく
+const clock  = new THREE.Clock();
+const loader = new THREE.GLTFLoader();
+let mixer;
+
+loader.load(
+	// 読み込むglTFファイルへのパス
+	'./model/mobko/mobko-bake-run.gltf',
+	// 読み込み（Ajax）完了後のコールバック
+	function ( gltf ) {
+
+		scene.add( gltf.scene );
+
+		// gltfオブジェクト用のアニメーションプレイヤーを作る
+		mixer = new THREE.AnimationMixer( gltf.scene );
+
+		// アニメーションプレイヤーにアニメーションを登録する。
+		// Blenderでのアニメーションが gltf.animations に配列で格納されている
+		// ただし、現時点では 1つ（0番目）しか出力されない。
+		const runAnimation = mixer.clipAction( gltf.animations[ 0 ] );
+
+		// アニメーションプレイヤー（mixer）に登録されたアニメーションを再生する
+		runAnimation.play();
+
+	}
+);
+
+( function anim () {
+
+	requestAnimationFrame( anim );
+
+	const delta = clock.getDelta();
+
+	// アニメーションプレイヤーの時間を送る
+	if ( mixer ) mixer.update( delta );
+
+	renderer.render( scene, camera );
+
+} )();
+</script>
+
+</body>
+</html>

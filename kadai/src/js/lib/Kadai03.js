@@ -1,6 +1,8 @@
 import * as THREE from 'three'
 import OrbitControls from 'three-orbitcontrols'
 import GLTFLoader from 'three-gltf-loader';
+import EffectComposer, { RenderPass, ShaderPass, CopyShader } from 'three-effectcomposer-es6'
+
 
 // 参考　https://ryo620.org/blog/2018/02/threejs-animation/
 
@@ -11,6 +13,9 @@ export default class Kadai03 {
     this.height = window.innerHeight;
     this.canvas.width = this.width;
     this.canvas.height = this.height;
+    this.renderFlag = false;
+    this.moonGroup = new THREE.Group()
+    this.satelliteGrop = new THREE.Group()
     this._initHandler();
   }
 
@@ -40,6 +45,7 @@ export default class Kadai03 {
 
   _setScene(){
     this.scene = new THREE.Scene()
+    this.scene.fog = new THREE.Fog(0x000000, 0.1, 80)
   }
 
   _setRender(){
@@ -84,7 +90,9 @@ export default class Kadai03 {
     gltfLoader.load(url, (data) => {
       const gltf = data;
       this.satellite = gltf.scene;
-      this.scene.add(this.satellite);
+      this.satelliteGrop.add(this.satellite);
+      this.satellite.scale.set(0.1,0.1,0.1);
+      this.moonGroup.add(this.satelliteGrop)
       this._setContents()
     });
 
@@ -110,27 +118,44 @@ export default class Kadai03 {
     const geometry = new THREE.SphereGeometry(10, 50, 50)
     const material = new THREE.MeshLambertMaterial()
     material.map = this.moonTexture;
-    console.log(this.moonTexture);
     this.moon = new THREE.Mesh(geometry, material)
-    this.scene.add(this.moon)
+    this.moonGroup.add(this.moon)
     this.moon.scale.set(0.25, 0.25, 0.25)
+    this.scene.add(this.moonGroup);
   }
 
   _render(){
     requestAnimationFrame(() => {
       this._render()
     });
+    if (!this.renderFlag) return;
     this.nowTime = Date.now() - this.startTime;
-    this.nowTime /= 1000;
+    this.nowTime /= 2000;
     this.rad = this.nowTime % (Math.PI * 2.0);
     this.sin = Math.sin(this.rad)
     this.cos = Math.cos(this.rad)
-    this.moon.position.x = this.sin * 20;
-    this.moon.position.z = this.cos * 20;
-    this.moon.rotation.y = this.rad;
-    this.satellite.rotation.z += 0.01
+
+    // this.moon.position.x = this.sin * 20;
+    // this.moon.position.z = this.cos * 20;
+    // this.moon.rotation.y = this.rad;
+    this.moon.position.set(this.nVector[0] * 10, 0.0, this.nVector[1] * 10)
+
+    // this.moonGroup.position.x = 20;
+
+    this.satelliteGrop.position.x = this.moon.position.x;
+    this.satelliteGrop.position.y = this.moon.position.y;
+    this.satelliteGrop.position.z = this.moon.position.z;
+
+    this.satellite.position.x = -this.sin * 5;
+    this.satellite.position.z = this.cos * 5;
+    this.satellite.position.y = this.cos * 5;
+    this.satellite.rotation.z += 0.001
+
     this.earth.rotation.y += 0.001
     this.moon.rotation.y += 0.001
+
+    // this.camera.position.z = this.moon.position.z + 50
+    // this.camera.position.x = this.moon.position.x
     this.renderer.render(this.scene, this.camera);
   }
 
@@ -145,11 +170,26 @@ export default class Kadai03 {
     this.renderer.render(this.scene, this.camera)
   }
 
+  _normalize2D(vec){
+    const len = this._calcLength2D(vec)
+    this.renderFlag = true;
+    return [vec[0] / len, vec[1] / len,]
+  }
+
+  _calcLength2D(vec){
+    return Math.sqrt(vec[0] * vec[0] + vec[1] * vec[1])
+  }
+
   _initHandler(){
     this._createThree();
     this._windowResize();
     window.addEventListener('resize', ()=>{
       this._windowResize();
+    })
+    window.addEventListener('mousemove', (e)=>{
+      this.screenX = e.clientX - this.width / 2;
+      this.screenY = e.clientY - this.height / 2;
+      this.nVector = this._normalize2D([this.screenX, this.screenY])
     })
   }
 }

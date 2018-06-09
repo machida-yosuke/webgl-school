@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>=^.^=</title>
+<style>
+body{margin: 0;}
+canvas{display: block;}
+</style>
+</head>
+<body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/93/three.min.js"></script>
+<script src="./js/loaders/GLTFLoader.js"></script>
+<script src="./js/loaders/DRACOLoader.js"></script>
+<script>
+const width  = window.innerWidth;
+const height = window.innerHeight;
+const clock = new THREE.Clock();
+const lookAtPosition = new THREE.Vector3( 0, 1, 0 );
+
+const scene  = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera( 45, width / height, 0.001, 100 );
+camera.position.set( 0, 1, 3 );
+const renderer = new THREE.WebGLRenderer( { antialias: true } );
+renderer.setSize( width, height );
+renderer.gammaInput = true;
+renderer.gammaOutput = true;
+document.body.appendChild( renderer.domElement );
+
+scene.add( new THREE.HemisphereLight( 0xffffff, 0x332222 ) );
+
+// ここに GLTFLoader を追加していく
+const loader = new THREE.GLTFLoader();
+THREE.DRACOLoader.setDecoderPath( './js/libs/draco/gltf/' );
+loader.setDRACOLoader( new THREE.DRACOLoader() );
+
+loader.load(
+	// 読み込むglTFファイルへのパス
+	'./model/venus-de-milo/venus-de-milo-draco.gltf',
+	// 読み込み（Ajax）完了後のコールバック
+	function ( gltf ) {
+
+		scene.add( gltf.scene );
+
+		// https://github.com/google/draco/issues/349
+		THREE.DRACOLoader.releaseDecoderModule();
+
+	}
+);
+
+( function anim () {
+
+	requestAnimationFrame( anim );
+
+	const elapsed = clock.getElapsedTime();
+
+	camera.position.set(
+		Math.sin( elapsed ) * 3,
+		camera.position.y,
+		Math.cos( elapsed ) * 3
+	);
+
+	camera.lookAt( lookAtPosition );
+
+	renderer.render( scene, camera );
+
+} )();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>=^.^=</title>
+<style>
+body{margin: 0;}
+canvas{display: block;}
+</style>
+</head>
+<body>
+
+<canvas id="renderCanvas"></canvas>
+
+<script src="https://cdn.babylonjs.com/babylon.js"></script>
+<script src="https://cdn.babylonjs.com/loaders/babylon.glTF2FileLoader.min.js"></script>
+<script>
+
+const width  = window.innerWidth;
+const height = window.innerHeight;
+
+const canvas = document.getElementById( 'renderCanvas' );
+canvas.width = width;
+canvas.height = height;
+const engine = new BABYLON.Engine( canvas );
+const scene = new BABYLON.Scene( engine );
+
+const camera = new BABYLON.FreeCamera( 'camera1', new BABYLON.Vector3( 0, 0, -0.5 ), scene );
+camera.minZ = 0.001;
+camera.maxZ = 100;
+const light = new BABYLON.HemisphericLight( 'light1', new BABYLON.Vector3( 0, 1, 0 ), scene );
+light.diffuse = BABYLON.Color3.FromHexString( '#ffffff' );
+light.groundColor = BABYLON.Color3.FromHexString( '#332222' );
+
+BABYLON.SceneLoader.LoadAssetContainer( './model/barger/', 'barger.gltf', scene, function( container ) {
+
+	container.addAllToScene();
+
+} );
+
+engine.runRenderLoop( function() {
+
+	scene.render();
+
+} );
+</script>
+
+</body>
+</html>

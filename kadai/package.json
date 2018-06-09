@@ -34,6 +34,7 @@
     "reset.css": "^2.0.2",
     "sass-loader": "^6.0.7",
     "three": "^0.92.0",
+    "three-js": "^79.0.0",
     "webpack": "^4.4.1",
     "webpack-cli": "^2.0.13",
     "webpack-dev-server": "^3.1.1"
@@ -54,6 +55,7 @@
   ],
   "dependencies": {
     "dat.gui": "^0.7.1",
+    "three-effectcomposer-es6": "0.0.4",
     "three-gltf-loader": "^1.93.0",
     "three-gltf2-loader": "^1.2.0",
     "three-orbitcontrols": "^2.0.0"

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>=^.^=</title>
+<style>
+body{margin: 0;}
+canvas{display: block;}
+.input{
+	position: absolute;
+	padding: 10px;
+	background: rgba( 255, 255, 255, .8 );
+}
+</style>
+</head>
+<body>
+
+<div class="input">
+	<input type="range" value="0" min="0" max="1" step="0.1" oninput="morph0( + this.value )">まぶた<br>
+	<input type="range" value="0" min="0" max="1" step="0.1" oninput="morph1( + this.value )">口の開閉<br>
+	<input type="range" value="0" min="0" max="1" step="0.1" oninput="morph2( + this.value )">口の角度<br>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/93/three.min.js"></script>
+<script src="./js/loaders/GLTFLoader.js"></script>
+<script>
+const width  = window.innerWidth;
+const height = window.innerHeight;
+
+const scene  = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera( 45, width / height, 0.001, 100 );
+camera.position.set( 0, 1, 3 );
+const renderer = new THREE.WebGLRenderer( { antialias: true } );
+renderer.setSize( width, height );
+renderer.gammaInput = true;
+renderer.gammaOutput = true;
+document.body.appendChild( renderer.domElement );
+
+scene.add( new THREE.HemisphereLight( 0xffffff , 0x332222 ) );
+
+// ここに GLTFLoader を追加していく
+const loader = new THREE.GLTFLoader();
+let monsterMesh;
+
+loader.load(
+	// 読み込むglTFファイルへのパス
+	'./model/monster/monster.gltf',
+	// 読み込み（Ajax）完了後のコールバック
+	function ( gltf ) {
+
+		// シェイプキーが付与されたメッシュを「monsterMesh」として保持する
+		// gltf内のシーンの構造はBlender上での構造と同様になっており、
+		// gltf.scene.childrenにはBlenderでもともと光源だったオブジェクトなども含まれている。
+		const armature = gltf.scene.children[ 0 ];
+		monsterMesh = armature.children[ 0 ];
+
+		scene.add( gltf.scene );
+
+	}
+);
+
+( function anim () {
+
+	requestAnimationFrame( anim );
+	renderer.render( scene, camera );
+
+} )();
+
+function morph0( value ) {
+
+	monsterMesh.morphTargetInfluences[ 0 ] = value;
+
+}
+
+function morph1( value ) {
+
+	monsterMesh.morphTargetInfluences[ 1 ] = value;
+
+}
+
+function morph2( value ) {
+
+	monsterMesh.morphTargetInfluences[ 2 ] = value;
+
+}
+
+</script>
+
+</body>
+</html>

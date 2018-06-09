@@ -1,0 +1,170 @@
+{
+  "accessors": [
+    {
+      "componentType": 5125,
+      "count": 822729,
+      "max": [
+        822728
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "componentType": 5126,
+      "count": 822729,
+      "max": [
+        0.9999925494194031,
+        1,
+        0.9999980330467224
+      ],
+      "min": [
+        -0.9999951720237732,
+        -0.9999992251396179,
+        -0.9999993443489075
+      ],
+      "type": "VEC3"
+    },
+    {
+      "componentType": 5126,
+      "count": 822729,
+      "max": [
+        0.3443980813026428,
+        2.0293924808502197,
+        0.34276849031448364
+      ],
+      "min": [
+        -0.3258494436740875,
+        -0.0006067265057936311,
+        -0.26886966824531555
+      ],
+      "type": "VEC3"
+    }
+  ],
+  "asset": {
+    "generator": "Khronos Blender glTF 2.0 exporter",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 1253299
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 1253300,
+      "uri": "venus-de-milo-draco.bin"
+    }
+  ],
+  "materials": [
+    {
+      "name": "Material",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.6400000190734865,
+          0.6400000190734865,
+          0.6400000190734865,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 1
+      },
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "alphaMode": "OPAQUE",
+      "doubleSided": false
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Venus.001",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 2
+          },
+          "indices": 0,
+          "material": 0,
+          "mode": 4,
+          "extensions": {
+            "KHR_draco_mesh_compression": {
+              "bufferView": 0,
+              "attributes": {
+                "NORMAL": 0,
+                "POSITION": 1
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "name": "Camera",
+      "rotation": [
+        0.483536034822464,
+        0.33687159419059753,
+        -0.20870360732078552,
+        0.7804827094078064
+      ],
+      "translation": [
+        7.481131553649902,
+        5.34366512298584,
+        6.5076398849487305
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Lamp",
+      "rotation": [
+        0.16907575726509094,
+        0.7558802962303162,
+        -0.27217137813568115,
+        0.570947527885437
+      ],
+      "scale": [
+        1,
+        1,
+        0.9999999403953552
+      ],
+      "translation": [
+        4.076245307922363,
+        5.903861999511719,
+        -1.0054539442062378
+      ]
+    },
+    {
+      "mesh": 0,
+      "name": "Venus"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Scene",
+      "nodes": [
+        2,
+        1,
+        0
+      ]
+    }
+  ],
+  "extensionsRequired": [
+    "KHR_draco_mesh_compression"
+  ],
+  "extensionsUsed": [
+    "KHR_draco_mesh_compression"
+  ]
+}
