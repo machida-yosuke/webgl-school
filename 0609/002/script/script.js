@@ -30,8 +30,8 @@
 
         // キャンバスの大きさはウィンドウの短辺
         canvasSize = Math.min(window.innerWidth, window.innerHeight);
-        canvas.width  = canvasSize;
-        canvas.height = canvasSize;
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
 
         // シェーダロードへ移行
         loadShader();
@@ -42,6 +42,7 @@
         prg = gl3.createProgramFromFile(
             './shader/main.vert',
             './shader/main.frag',
+            // 頂点属性のしては名前とtストライドの数に注意が必要
             ['position', 'color'], // attribute 変数を追加 @@@
             [3, 4],                // attribute 変数のストライドも追加 @@@
             [],
@@ -64,17 +65,19 @@
         // --------------------------------------------------------------------
         // 頂点の座標データ
         position = [
-             0.0,  0.5,  0.0, // ひとつ目の頂点の x, y, z 座標
-             0.5, -0.5,  0.0, // ふたつ目の頂点の x, y, z 座標
-            -0.5, -0.5,  0.0  // みっつ目の頂点の x, y, z 座標
+             Math.random(),  Math.random(),  1.0, // ひとつ目の頂点の x, y, z 座標
+             Math.random(), -Math.random(),  1.0, // ふたつ目の頂点の x, y, z 座標
+            -Math.random(), -Math.random(),  1.0  // みっつ目の頂点の x, y, z 座標
         ];
         // 頂点の色データ @@@
+        // 頂点３つ、長さが９になる
         color = [
             1.0, 0.0, 0.0, 1.0, // ひとつ目の頂点の R, G, B, A カラー
-            0.0, 1.0, 0.0, 1.0, // ふたつ目の頂点の R, G, B, A カラー
-            0.0, 0.0, 1.0, 1.0  // みっつ目の頂点の R, G, B, A カラー
+            1.0, 1.0, 0.0, 1.0, // ふたつ目の頂点の R, G, B, A カラー
+            1.0, 0.0, 1.0, 1.0  // みっつ目の頂点の R, G, B, A カラー
         ];
         // 座標データから頂点バッファを生成
+        // ストライド４、頂点３つ、長さは１２
         VBO = [
             gl3.createVbo(position),
             gl3.createVbo(color) // 色データからも VBO を作るのを忘れずに！ @@@
@@ -86,15 +89,16 @@
 
     function render(){
         // ビューを設定
-        gl3.sceneView(0, 0, canvasSize, canvasSize);
+        gl3.sceneView(0, 0, window.innerWidth, window.innerHeight);
         // シーンのクリア
-        gl3.sceneClear([0.7, 0.7, 0.7, 1.0]);
+        gl3.sceneClear([1.0, 0.5, 0.5, 1.0]);
         // どのプログラムオブジェクトを利用するか明示的に設定
         prg.useProgram();
         // プログラムに頂点バッファをアタッチ
+        // setAttributeは配列で受け取る
+        // 複数のジオkメトリを使ってる場合は描きたいジオメトリのVBOをドローコール前にバインドしなければならない
         prg.setAttribute(VBO);
         // ドローコール（描画命令）
         gl3.drawArrays(gl3.gl.TRIANGLES, position.length / 3);
     }
 })();
-

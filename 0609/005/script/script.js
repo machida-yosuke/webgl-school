@@ -125,7 +125,7 @@
             [1.0, 1.0, 1.0, 1.0]
         ]);
         // インデックスデータを用いる場合のドローコール（描画命令） @@@
+        //  drowArray _ indexの場合は使わない
         gl3.drawElements(gl3.gl.TRIANGLES, index.length);
     }
 })();
-
