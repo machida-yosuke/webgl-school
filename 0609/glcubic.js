@@ -3359,7 +3359,8 @@ var gl3 = function () {
         key: 'drawArrays',
         value: function drawArrays(primitive, vertexCount) {
             var offset = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-
+            // argumentsは引数を見れる
+            console.log('arguments', arguments , primitive, vertexCount);
             this.gl.drawArrays(primitive, offset, vertexCount);
         }
 

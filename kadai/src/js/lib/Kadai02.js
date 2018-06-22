@@ -17,7 +17,6 @@ export default class Kadai02 {
     this.time = new Date();
     this._initHandler()
   }
-
   _createThree(){
     this._createCamera()
     this._createScene()
