@@ -40,6 +40,6 @@ void main(){
         // ここでは頂点の本来の色を intensity に応じて加算しています @@@
         destColor.rgb += vColor.rgb * intensity;
     }
-    gl_FragColor = destColor;
+    gl_FragColor = step(0.1, destColor);
 }
 

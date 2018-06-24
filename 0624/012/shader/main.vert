@@ -2,6 +2,7 @@ attribute vec3 position;
 attribute vec3 normal;
 attribute vec4 color;
 uniform mat4 mvpMatrix;
+// 法線変換行列はモデル変換行れるの逆行列
 uniform mat4 normalMatrix; // 法線変換行列 @@@
 varying vec4 vColor;
 
@@ -10,7 +11,11 @@ const vec3 light = normalize(vec3(1.0));
 
 void main(){
     // 法線を行列で変換する @@@
-    vec3 n = (normalMatrix * vec4(normal, 0.0)).xyz;
+    vec3 N = (normalMatrix * vec4(normal, 0.0));
+    vec4 n =n.xyz
+    // このnは逆転地行列の効果によって
+    // モデル座標変換の影響を法線に与えた状態になってる
+
     // ベクトルの内積を用いて照度を計算する
     float diffuse = max(dot(n, light), 0.0);
     // 求めた照度を頂点の色に乗算する

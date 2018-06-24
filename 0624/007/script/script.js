@@ -135,7 +135,9 @@
         // 深度テストとカリングを有効化する @@@
         gl.enable(gl.DEPTH_TEST); // 深度テストを有効化
         gl.enable(gl.CULL_FACE);  // カリングを有効化
-        gl.cullFace(gl.BACK);     // カリング面の設定
+        // BACK 裏面をけす
+        // FRONT　表面をけす
+        gl.cullFace(gl.FRONT);     // カリング面の設定
 
         // 汎用変数の初期化 @@@
         run = true;

@@ -5,6 +5,7 @@ uniform vec4 globalColor;
 varying vec4 vColor;
 void main(){
     vColor = color * globalColor;
+    // ビュー変換もプロジェクションもモデル変換もすべてこのタイミングで適用される
     gl_Position = mvpMatrix * vec4(position, 1.0);
 }
 

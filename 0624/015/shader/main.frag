@@ -27,6 +27,13 @@ void main(){
     // 反射光を求める
     float specular = max(dot(v, light), 0.0);
     // 反射光は、べき算を使って強調する
+    // 1-20の値
+    // powべき乗　第一引数を第二引数の値で乗する
+    // specular＝0.5　exponent＝1の場合
+    // 0.５になる
+    // specular＝0.5　exponent＝2の場合
+    // 0.25になる
+    // １より大きい数値を入れると値はちいさくなる
     specular = pow(specular, exponent);
 
     // 拡散光

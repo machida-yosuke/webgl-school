@@ -4,7 +4,7 @@ varying vec3 vNormal;
 varying vec4 vColor;
 
 // 平行光源（ディレクショナルライト）のライトベクトル
-const vec3 light = normalize(vec3(1.0));
+const vec3 light = normalize(vec3(1.0, 0.0, 0.0));
 
 void main(){
     // フラグメントシェーダ側で法線の変換とライトの計算を行う @@@

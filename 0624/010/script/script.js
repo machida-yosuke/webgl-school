@@ -58,6 +58,7 @@
             './shader/main.vert',
             './shader/main.frag',
             ['position', 'normal', 'color'],
+            // ストライド
             [3, 3, 4],
             ['mvpMatrix'],
             ['matrix4fv'],
@@ -86,6 +87,7 @@
             gl3.createVbo(torusData.normal),
             gl3.createVbo(torusData.color)
         ];
+        
         // インデックスバッファを生成
         IBO = gl3.createIbo(torusData.index);
 
@@ -124,7 +126,8 @@
         prg.setAttribute(VBO, IBO);
 
         // 時間の経過を得る（Date.now は現在時刻のタイムスタンプをミリ秒で返す）
-        nowTime = (Date.now() - startTime) / 1000;
+        // nowTime = (Date.now() - startTime) / 1000;
+        nowTime = 0
         mat4.identity(mMatrix);
         mat4.rotate(mMatrix, Math.PI * 0.1, [1.0, 0.0, 0.0], mMatrix); // ちょい手前に傾ける @@@
         mat4.rotate(mMatrix, nowTime * 0.5, [0.0, 1.0, 0.0], mMatrix); // 時間経過で Y 軸回転 @@@
