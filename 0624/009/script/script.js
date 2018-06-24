@@ -103,13 +103,14 @@
                 -width, 0.0, -width
             );
             color.push(
-                0.8, 0.5, 0.1, 1.0,
-                0.8, 0.5, 0.1, 1.0,
-                0.8, 0.5, 0.1, 1.0,
-                0.8, 0.5, 0.1, 1.0
+                1.0, 0.0, 0.0, 1.0,
+                0.0, 1.0, 0.0, 1.0,
+                0.0, 0.0, 1.0, 1.0,
+                0.0, 0.0, 0.0, 1.0
             );
             index.push(
-                0, 1, 2, 2, 1, 3
+                0, 1, 2,
+                2, 1, 3
             );
         }
 
@@ -158,7 +159,7 @@
         // 時間の経過を得る（Date.now は現在時刻のタイムスタンプをミリ秒で返す）
         nowTime = (Date.now() - startTime) / 1000;
         mat4.identity(mMatrix);
-        mat4.rotate(mMatrix, nowTime * 0.5, [1.0, 1.0, 1.0], mMatrix);
+        mat4.rotate(mMatrix, 1, [1.0, 1.0, 1.0], mMatrix);
         mat4.multiply(vpMatrix, mMatrix, mvpMatrix);
         // uniform 変数をシェーダにプッシュ
         prg.pushShader([

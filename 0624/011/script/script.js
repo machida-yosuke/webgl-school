@@ -120,9 +120,18 @@
 
         // 時間の経過を得る（Date.now は現在時刻のタイムスタンプをミリ秒で返す）
         nowTime = (Date.now() - startTime) / 1000;
-        mat4.identity(mMatrix);
-        mat4.rotate(mMatrix, Math.PI * 0.1, [1.0, 0.0, 0.0], mMatrix); // ちょい手前に傾ける
+        // モデル座標変換を行う
+        mat4.identity(mMatrix);// 行列の単位
+        
+        // 移動も動かしてから移動
+        mat4.translate(mMatrix,[0.9, 0.0, 0.0], mMatrix)
+        // 上の段が傾ける
+        // 下の段が回転
+        mat4.rotate(mMatrix, Math.PI * 0.2, [1.0, 0.0, 0.0], mMatrix); // ちょい手前に傾ける
         mat4.rotate(mMatrix, nowTime * 0.5, [0.0, 1.0, 0.0], mMatrix); // 時間経過で Y 軸回転
+        // モデル座標変換は直感とは逆に書く
+        // 数学的な理解があればわかる
+        // 行列のかける順番によってかわる
         mat4.multiply(vpMatrix, mMatrix, mvpMatrix);
         // uniform 変数をシェーダにプッシュ
         prg.pushShader([

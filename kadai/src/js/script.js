@@ -3,9 +3,12 @@ import Kadai01 from  './lib/Kadai01'
 import NewZero from './lib/NewZero'
 import Kadai02 from './lib/Kadai02'
 import Kadai03 from './lib/Kadai03'
+import Kadai04 from './lib/Kadai04'
 
 const canvas = document.querySelector('#js-canvas');
-const page = 'kadai03'
+const pureCanvas = document.querySelector('#js-pure-webgl');
+
+const page = 'kadai04'
 
 switch (page) {
   case 'kadai01':
@@ -31,6 +34,11 @@ switch (page) {
       canvas
     })
     break;
+  case 'kadai04':
+    const kadai04 = new Kadai04({
+      canvas: pureCanvas
+    })
+  break;
 
   default:
 
