@@ -3274,7 +3274,6 @@ var gl3 = function () {
         value: function init(canvas, initOptions, webgl2Mode) {
             var opt = initOptions || {};
             this.ready = false;
-            console.log('ready', canvas);
             if (canvas == null) {
                 return false;
             }
@@ -4285,9 +4284,11 @@ var ProgramManager = function () {
                     gl.vertexAttribPointer(this.attL[i], this.attS[i], gl.FLOAT, false, 0, 0);
                 }
             }
+            console.log('setAttribute', vbo, ibo);
             if (ibo != null) {
                 gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ibo);
             }
+            console.log('ssssssssss', vbo, ibo);
         }
 
         /**

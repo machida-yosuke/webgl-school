@@ -6,7 +6,7 @@ uniform float fogEnd;       // フォグ終了位置
 varying vec3  vPosition;    // モデル座標変換行列後の頂点の位置
 varying vec3  vNormal;      // 頂点本来の法線
 varying vec4  vColor;       // 頂点本来の色
-
+varying vec3 vRandomValue;
 const vec3 fogColor = vec3(0.7);         // フォグの色
 const vec3 light = normalize(vec3(1.0)); // ライトベクトル
 
@@ -33,6 +33,5 @@ void main(){
     // フォグの影響を考慮した色を求める
     destColor.rgb = mix(destColor.rgb, fogColor, fog);
 
-    gl_FragColor = destColor;
+    gl_FragColor = vec4(destColor.xyz * vRandomValue, 1.0);
 }
-

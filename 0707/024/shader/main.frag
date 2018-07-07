@@ -27,12 +27,17 @@ void main(){
     destColor.rgb += vColor.rgb * 0.2;
 
     // フォグの計算 @@@
+    // カメラと頂点の間の距離をはかる
     float eyeDistance = length(vPosition - eyePosition);
     // 計測した距離からフォグの影響度を示す係数を求める @@@
+    //clamp(対象となるあたい, 最小値, 最大値)　最小以下にならないし、最大以上にもならない
     float fog = clamp((eyeDistance - fogStart) / (fogEnd - fogStart), 0.0, 1.0);
     // フォグの影響を考慮した色を求める @@@
+    // mix(対象１, 対象２, 補完係数) == 線形補間
+    // 補完係数が0なら戻り値は対象１
+    // 補完係数が1なら戻り値は対象2
+    // 補完係数が0.5なら戻り値は対象１と対象２を１：１で線形補間
     destColor.rgb = mix(destColor.rgb, fogColor, fog);
 
     gl_FragColor = destColor;
 }
-

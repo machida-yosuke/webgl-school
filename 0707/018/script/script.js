@@ -95,11 +95,18 @@
         img.addEventListener('load', () => {
             // 空のテクスチャオブジェクトを生成
             texture = gl.createTexture();
+            // アクティブなテクスチャユニットを切り替える
+            gl.activeTexture(gl.TEXTURE0)
+            // TEXTURE0 - TEXTURE31まで
+            console.log('222', gl.TEXTURE0);
+
             // テクスチャオブジェクトをバインド
+            // TEXTURE_2D　二次元ビットマップ
             gl.bindTexture(gl.TEXTURE_2D, texture);
             // バインド済みテクスチャオブジェクトに画素を適用
             gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
             // バインド済みテクスチャのミップマップを自動生成
+            // リソースを読み込んでテクスチャに適用した場合呼ぶ
             gl.generateMipmap(gl.TEXTURE_2D);
             // 間違い防止のために念のためバインドは解除しておくのがお行儀が良い
             gl.bindTexture(gl.TEXTURE_2D, null);
@@ -145,6 +152,8 @@
             gl3.createVbo(texCoord) // VBO も忘れずに追加 @@@
         ];
         IBO = gl3.createIbo(index);
+
+
 
         // 行列の初期化
         mMatrix      = mat4.identity(mat4.create());
@@ -296,4 +305,3 @@
     }
     // カメラ関連ここまで =================================================
 })();
-

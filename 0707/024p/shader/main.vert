@@ -8,8 +8,9 @@ uniform float time; // 時間の経過を追加 @@@
 varying vec3 vPosition;
 varying vec3 vNormal;
 varying vec4 vColor;
-
+varying vec3 vRandomValue;
 void main(){
+    vRandomValue = randomValue;
     // 奥行きと時間に応じたサイン波を作る @@@
     float s = sin(randomValue.z + time * 0.5) * 0.5;
     // ランダム座標を頂点に足し込む @@@
@@ -19,4 +20,3 @@ void main(){
     vColor = color;
     gl_Position = mvpMatrix * vec4(p, 1.0);
 }
-

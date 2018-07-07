@@ -3,9 +3,9 @@ export default class Kadai04 {
     this.position = [
       0.0,  0.5,  0.0,
       0.5,  0.1,  0.0,
-      -0.5,  0.1,  0.0,
+     -0.5,  0.1,  0.0,
       0.3, -0.5,  0.0,
-      -0.3, -0.5,  0.0
+     -0.3, -0.5,  0.0
     ];
     // 頂点の色データ
     this.color = [
@@ -51,6 +51,7 @@ export default class Kadai04 {
       gl3.createVbo(this.position),
       gl3.createVbo(this.color)
     ]
+
     this.IBO = [
       gl3.createIbo(this.index)
     ]
@@ -67,7 +68,6 @@ export default class Kadai04 {
     this.prg.pushShader([
       [1.0, 1.0, 1.0, 1.0]
     ])
-    console.log(this.index.length);
     gl3.drawElements(gl3.gl.TRIANGLES, this.index.length)
   }
 }

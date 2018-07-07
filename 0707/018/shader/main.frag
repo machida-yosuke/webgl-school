@@ -1,7 +1,7 @@
 precision mediump float;
 
 uniform sampler2D textureUnit; // テクスチャユニット番号 @@@
-varying vec4 vColor;
+varying vec4 vColor;//　やや青い
 varying vec2 vTexCoord;
 
 void main(){
@@ -9,4 +9,3 @@ void main(){
     vec4 samplerColor = texture2D(textureUnit, vTexCoord);
     gl_FragColor = vColor * samplerColor;
 }
-

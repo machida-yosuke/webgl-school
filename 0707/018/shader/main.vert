@@ -1,5 +1,5 @@
 attribute vec3 position;
-attribute vec4 color;
+attribute vec4 color; //　やや青い
 attribute vec2 texCoord; // テクスチャ座標 @@@
 uniform mat4 mvpMatrix;
 varying vec4 vColor;
@@ -10,4 +10,3 @@ void main(){
     vTexCoord = texCoord; // フラグメントシェーダにそのまま送る @@@
     gl_Position = mvpMatrix * vec4(position, 1.0);
 }
-
