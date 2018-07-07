@@ -49,6 +49,10 @@ const webpackConfig = {
         // 各ファイル形式ごとのビルド設定
         rules: [
             {
+              test: /\.(glsl|vert|frag)$/,
+              loader: 'shader-loader',
+            },
+            {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 exclude: /(node_modules)/,

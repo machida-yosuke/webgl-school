@@ -3274,7 +3274,7 @@ var gl3 = function () {
         value: function init(canvas, initOptions, webgl2Mode) {
             var opt = initOptions || {};
             this.ready = false;
-            console.log('ready', canvas); 
+            console.log('ready', canvas);
             if (canvas == null) {
                 return false;
             }
@@ -3284,7 +3284,7 @@ var gl3 = function () {
                 this.canvas = document.getElementById(canvas);
             }
             if (this.canvas == null) {
-                console.log('ready', this.canvas); 
+                console.log('ready', this.canvas);
                 return false;
             }
             if (webgl2Mode === true) {
@@ -3896,8 +3896,10 @@ var gl3 = function () {
         key: 'createProgramFromFile',
         value: function createProgramFromFile(vsPath, fsPath, attLocation, attStride, uniLocation, uniType, callback) {
             if (this.gl == null) {
+              console.log('this.gl', this.gl);
                 return null;
             }
+
             var mng = new ProgramManager(this.gl, this.isWebGL2);
             var src = {
                 vs: {

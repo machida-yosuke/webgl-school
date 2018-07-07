@@ -8,7 +8,7 @@ import Kadai04 from './lib/Kadai04'
 const canvas = document.querySelector('#js-canvas');
 const pureCanvas = document.querySelector('#js-pure-webgl');
 
-const page = 'kadai03'
+const page = 'kadai04'
 
 switch (page) {
   case 'kadai01':
