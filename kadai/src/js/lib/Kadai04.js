@@ -22,6 +22,7 @@ export default class Kadai04 {
     ];
 
     this.canvas = opts.canvas;
+    console.log(this.canvas)
     gl3.init(this.canvas);
     if(!gl3.ready){
       console.log('initialize error');
@@ -52,9 +53,8 @@ export default class Kadai04 {
       gl3.createVbo(this.color)
     ]
 
-    this.IBO = [
-      gl3.createIbo(this.index)
-    ]
+    this.IBO = gl3.createIbo(this.index)
+
     this.render()
   }
 
