@@ -119,6 +119,7 @@
     }
 
     function loadTexture(){
+        console.log('img.srcimg.src');
         // 画像をロードしてテクスチャを生成する
         let img = new Image();
         // まず先にイベントハンドラを登録する
@@ -132,6 +133,7 @@
             initialize();
         }, false);
         img.src = 'sample.jpg';
+        console.log(img.src, 'img.srcimg.src');
     }
 
     function initialize(){
@@ -321,4 +323,3 @@
     }
     // カメラ関連ここまで =================================================
 })();
-

@@ -1,4 +1,6 @@
 precision mediump float;
+// ポストエフェクト用　画面に写ってやつ
+//レンダリングしたレンダーバッファ
 uniform sampler2D textureUnit;
 uniform float     dark;
 varying vec2 vTexCoord;

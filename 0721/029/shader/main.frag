@@ -7,19 +7,22 @@ varying vec3        vPosition;    // モデル座標変換行列後の頂点の�
 varying vec3        vNormal;      // 頂点本来の法線
 
 void main(){
-    // 法線の変換
-    vec3 n = (normalMatrix * vec4(normalize(vNormal), 0.0)).xyz;
-    // 頂点座標とカメラの位置から視線ベクトルを算出
-    vec3 eyeDirection = vPosition - eyePosition;
+  // 法線の変換
+  vec3 n = (normalMatrix * vec4(normalize(vNormal), 0.0)).xyz;
+  // 頂点座標とカメラの位置から視線ベクトルを算出
+  // 終点　ー　視点　＝　終点から始点に向かうベクトル
+  // eyeDirection　向きと長さ
+  vec3 eyeDirection = vPosition - eyePosition;
 
-    // 反射ベクトルに用いる変数 @@@
-    vec3 reflectVector = n;
-    // もし反射有効なら reflect で反射ベクトルを求める @@@
-    if(reflection == true){
-        reflectVector = reflect(eyeDirection, n);
-    }
-    // 反射ベクトルを使ってキューブマップテクスチャからサンプリング @@@
-    vec4 envColor = textureCube(cubeTexture, reflectVector);
-    gl_FragColor = envColor;
+  // 反射ベクトルに用いる変数 @@@
+  vec3 reflectVector = n;
+  // もし反射有効なら reflect で反射ベクトルを求める @@@
+  // reflect　第一引数は処理の対象になるベクトル、第二は反射する面の法線ベクトル
+  // ここで反射ごのベクトルがわかる
+  if(reflection == true){
+    reflectVector = reflect(eyeDirection, n);
+  }
+  // 反射ベクトルを使ってキューブマップテクスチャからサンプリング @@@
+  vec4 envColor = textureCube(cubeTexture, reflectVector);
+  gl_FragColor = envColor;
 }
-

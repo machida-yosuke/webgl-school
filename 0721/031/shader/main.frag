@@ -1,3 +1,4 @@
+// 球体のライティングしてレンダリングしているシェーダ
 precision mediump float;
 uniform mat4      normalMatrix;
 uniform vec3      eyePosition;
@@ -19,4 +20,3 @@ void main(){
     vec4 destColor = samplerColor * vec4(vec3(diffuse), 1.0);    // 出力カラー
     gl_FragColor = destColor + vec4(vec3(specular), 0.0);
 }
-

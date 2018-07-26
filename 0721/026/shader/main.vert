@@ -12,8 +12,11 @@ void main(){
 
     // ランダムな値を使って頂点を動かす @@@
     float t = time * timeScale;
+    // 円運動の半径
     float r = randomValue.x * 0.025;
+    // 横方向の動き
     float s = sin(randomValue.y * t) * r;
+    // 縦方向の動き
     float c = cos(randomValue.z * t) * r;
 
     // 乱数から求めた値を頂点に加算してから座標変換する @@@
@@ -22,4 +25,3 @@ void main(){
     // 頂点のポイントサイズを指定（乱数の影響を受けるように） @@@
     gl_PointSize = pointSize * (randomValue.w + 0.1);
 }
-

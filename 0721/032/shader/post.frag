@@ -13,6 +13,7 @@ void main(){
         // ネガティブ反転
         vec4 negaColor = vec4(1.0 - destColor.rgb, destColor.a);
         // mix で結果は線形補間する
-        gl_FragColor = mix(destColor, negaColor, mixRatio);
+        // mix 第一引数と第二引数を第3引き数の値によって線形保管する
+        gl_FragColor = negaColor;
     }
 }

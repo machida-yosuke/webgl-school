@@ -12,10 +12,12 @@ void main(){
     vec3 n = (normalMatrix * vec4(normalize(vNormal), 0.0)).xyz;
 
     // 頂点座標とカメラの位置から視線ベクトルを算出（正規化する） @@@
+    // リフラクトの場合は正規化しないといけない
     vec3 eyeDirection = normalize(vPosition - eyePosition);
     // 屈折ベクトルに用いる変数 @@@
     vec3 refractVector = n;
     // もし屈折有効なら refract で屈折ベクトルを求める @@@
+    // 背景のキューを屈折させない
     if(refraction == true){
         refractVector = refract(eyeDirection, n, refractIndex);
     }
@@ -23,4 +25,3 @@ void main(){
     vec4 envColor = textureCube(cubeTexture, refractVector);
     gl_FragColor = envColor;
 }
-
